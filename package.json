@@ -1,0 +1,25 @@
+{
+	"name": "notepal",
+	"scripts": {
+		"dev": "next dev"
+	},
+	"devDependencies": {
+		"@types/lodash": "^4.14.191",
+		"@types/node": "18.11.18",
+		"@types/nunjucks": "^3.2.1",
+		"@types/react": "^18.0.27",
+		"@types/react-dom": "^18.0.10",
+		"typescript": "^4.9.4"
+	},
+	"dependencies": {
+		"@emotion/react": "^11.10.5",
+		"@mantine/core": "^5.10.1",
+		"@mantine/hooks": "^5.10.1",
+		"@mantine/modals": "^5.10.1",
+		"lodash": "^4.17.21",
+		"next": "^13.1.2",
+		"nunjucks": "^3.2.3",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	}
+}
