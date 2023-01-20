@@ -7,7 +7,7 @@ import { transform } from '../templates'
 import { useClipboard } from '@mantine/hooks'
 import { openModal } from "@mantine/modals";
 import { Navbar } from "../components/Navbar";
-import { mq } from "../utils";
+import { downloadText, mq } from "../utils";
 export default function Page() {
 
   const [selecteImportSourceId, setSelecteImportSourceId] = React.useState<string | null>(null)
@@ -124,10 +124,17 @@ export default function Page() {
                       <Stack>
                         <Textarea value={note} autosize>
                         </Textarea>
-                        <Button onClick={_ => {
-                          clipboard.copy(note)
-                          alert('已复制到剪贴板')
-                        }}>复制</Button>
+                        <Group grow>
+                          <Button variant="default" onClick={_ => {
+                            clipboard.copy(note)
+                            alert('已复制到剪贴板')
+                          }}>复制</Button>
+                          <Button onClick={_ => {
+                            downloadText('readwise.csv', note)
+                          }}>
+                            下载 .csv
+                          </Button>
+                        </Group>
                       </Stack>
                     )
                   })
