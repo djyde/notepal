@@ -1,4 +1,4 @@
-import { Accordion, Blockquote, Box, Button, Center, Group, MantineTheme, Paper, Stack, Text, Textarea } from "@mantine/core";
+import { Accordion, Blockquote, Box, Button, Center, Divider, Group, MantineTheme, Paper, Stack, Text, Textarea, Title } from "@mantine/core";
 import React from "react";
 import { Note } from "../parsers/model";
 import { parseWXRead, wxReadPlaceholder } from "../parsers/wxRead";
@@ -155,6 +155,15 @@ export default function Page() {
               </Group>
             </Stack>}
         </Stack>
+
+        <Divider sx={theme => ({
+          marginTop: 200,
+          marginBottom: theme.spacing.md
+        })} label="常见问题" labelPosition="center" />
+        <Stack sx={{
+        }}>
+          <QA />
+        </Stack>
       </Box>
     </div>
   )
@@ -182,5 +191,26 @@ function ImportForm(props: {
       <Button onClick={onClickTransform} sx={theme => ({
       })}>添加笔记</Button>
     </Stack>
+  )
+}
+
+const qa = [
+  {
+    q: '我的笔记会被上传到服务器吗？',
+    a: '不会。'
+  }
+]
+function QA() {
+  return (
+    <Accordion variant='contained'>
+      {qa.map(item => {
+        return (
+          <Accordion.Item value={item.q}>
+            <Accordion.Control>{item.q}</Accordion.Control>
+            <Accordion.Panel>{item.a}</Accordion.Panel>
+          </Accordion.Item>
+        )
+      })}
+    </Accordion>
   )
 }
