@@ -13,6 +13,7 @@
 	},
 	"dependencies": {
 		"@emotion/react": "^11.10.5",
+		"@emotion/server": "^11.10.0",
 		"@mantine/core": "^5.10.1",
 		"@mantine/hooks": "^5.10.1",
 		"@mantine/modals": "^5.10.1",
