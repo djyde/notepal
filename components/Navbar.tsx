@@ -24,7 +24,7 @@ export function Navbar(props: {
         })}>
           {props.logo}
         </Text>
-        <Text size='sm'>by <Text underline component="a" href="https://twitter.com/randyloop">RandySoft</Text>
+        <Text size='sm'>by <Text underline component="a" href="https://lutaonan.com">RandySoft</Text>
         </Text>
       </Group>
     </Box>
