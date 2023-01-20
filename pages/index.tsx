@@ -95,7 +95,7 @@ export default function Page() {
                           <Paper shadow="xs">
                             <Blockquote sx={theme => ({
                               fontSize: theme.fontSizes.sm,
-                            })} cite={note.chapterName}>
+                            })} cite={note.sideNote}>
                               {note.highlight}
                             </Blockquote>
                           </Paper>
