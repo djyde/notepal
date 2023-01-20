@@ -8,6 +8,15 @@ import { useClipboard } from '@mantine/hooks'
 import { openModal } from "@mantine/modals";
 import { Navbar } from "../components/Navbar";
 import { downloadText, mq } from "../utils";
+import Script from "next/script";
+declare var umami: any
+
+function track(eventName: string) {
+  if (umami) {
+    umami(eventName)
+  }
+}
+
 export default function Page() {
 
   const [selecteImportSourceId, setSelecteImportSourceId] = React.useState<string | null>(null)
@@ -40,6 +49,7 @@ export default function Page() {
 
   return (
     <div>
+      <Script data-website-id="ab77355d-e75e-49e9-aa22-acf5c3096d94" src="https://a.taonan.lu/ana.js" />
       <Box sx={theme => ({
       })}>
         <Navbar logo="NotePal" />
@@ -127,10 +137,12 @@ export default function Page() {
                         <Group grow>
                           <Button variant="default" onClick={_ => {
                             clipboard.copy(note)
+                            track('copy readwise csv')
                             alert('已复制到剪贴板')
                           }}>复制</Button>
                           <Button onClick={_ => {
                             downloadText('readwise.csv', note)
+                            track('download readwise csv')
                           }}>
                             下载 .csv
                           </Button>
