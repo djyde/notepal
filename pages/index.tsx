@@ -7,10 +7,7 @@ import { transform } from '../templates'
 import { useClipboard } from '@mantine/hooks'
 import { openModal } from "@mantine/modals";
 import { Navbar } from "../components/Navbar";
-export function mq(theme: MantineTheme, size: 'sx' | 'sm' | 'md' | 'lg' | 'xl') {
-  return `@media (min-width: ${theme.breakpoints[size]}px)`
-}
-
+import { mq } from "../utils";
 export default function Page() {
 
   const [selecteImportSourceId, setSelecteImportSourceId] = React.useState<string | null>(null)
@@ -43,11 +40,10 @@ export default function Page() {
 
   return (
     <div>
-      {/* <Box sx={theme => ({
-        padding: theme.spacing.md,
+      <Box sx={theme => ({
       })}>
         <Navbar logo="NotePal" />
-      </Box> */}
+      </Box>
       <Box sx={theme => ({
       })}>
         {/* <Text sx={theme => ({
@@ -62,7 +58,7 @@ export default function Page() {
           padding: 0,
           width: 640,
           margin: '0 auto',
-          marginTop: 200,
+          marginTop: 100,
           marginBottom: 200
         }
       })}>
@@ -75,7 +71,7 @@ export default function Page() {
               const sourceItem = importSource[sourceId]
               const isSelected = selecteImportSourceId === sourceId
               return (
-                <Button key={sourceId} onClick={_ => void onSelectImportSource(sourceId)} variant={isSelected ? 'outline' : 'default'} size='md'>{sourceItem.title}</Button>
+                <Button key={sourceId} onClick={_ => void onSelectImportSource(sourceId)} variant={isSelected ? 'light' : 'default'} size='md'>{sourceItem.title}</Button>
               )
             })}
           </Group>
@@ -136,7 +132,7 @@ export default function Page() {
                     )
                   })
                 }} variant='default'>Readwise CSV</Button>
-                <Button variant='default'>自定义格式</Button>
+                <Button disabled variant='default'>自定义格式</Button>
               </Group>
             </Stack>}
         </Stack>
