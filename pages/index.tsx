@@ -1,11 +1,12 @@
 import { Accordion, Blockquote, Box, Button, Center, Group, MantineTheme, Paper, Stack, Text, Textarea } from "@mantine/core";
 import React from "react";
 import { Note } from "../parsers/model";
-import { parseWXRead } from "../parsers/wxRead";
+import { parseWXRead, wxReadPlaceholder } from "../parsers/wxRead";
 import { flatMap, groupBy } from 'lodash'
 import { transform } from '../templates'
 import { useClipboard } from '@mantine/hooks'
 import { openModal } from "@mantine/modals";
+import { Navbar } from "../components/Navbar";
 export function mq(theme: MantineTheme, size: 'sx' | 'sm' | 'md' | 'lg' | 'xl') {
   return `@media (min-width: ${theme.breakpoints[size]}px)`
 }
@@ -28,7 +29,7 @@ export default function Page() {
     wxRead: {
       title: '微信读书',
       parser: parseWXRead,
-      placeholder: "微信读书"
+      placeholder: wxReadPlaceholder
     },
   } as Record<string, {
     title: string,
@@ -42,6 +43,11 @@ export default function Page() {
 
   return (
     <div>
+      {/* <Box sx={theme => ({
+        padding: theme.spacing.md,
+      })}>
+        <Navbar logo="NotePal" />
+      </Box> */}
       <Box sx={theme => ({
       })}>
         {/* <Text sx={theme => ({
@@ -56,7 +62,8 @@ export default function Page() {
           padding: 0,
           width: 640,
           margin: '0 auto',
-          marginTop: 200
+          marginTop: 200,
+          marginBottom: 200
         }
       })}>
         <Stack>
