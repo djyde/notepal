@@ -35,12 +35,16 @@ export function Navbar(props: {
           <Group sx={{
             marginLeft: 'auto'
           }}>
-            <Text component="a" target={"_blank"} href="https://www.bilibili.com/video/BV1q3411d7Gj/" sx={theme => ({
-              transition: 'color 0.2s ease',
-              ":hover": {
-                color: theme.colors.blue[7],
-              }
-            })}>使用教程</Text>
+            <Link style={{ color: 'inherit', textDecoration: 'none' }} href="/doc">
+              <Text component="a" target={"_blank"} href="https://www.bilibili.com/video/BV1q3411d7Gj/" sx={theme => ({
+                transition: 'color 0.2s ease',
+                ":hover": {
+                  color: theme.colors.blue[7],
+                }
+              })}>
+                使用教程
+              </Text>
+            </Link>
             <Text component="a" target={'_blank'} href="https://github.com/djyde/notepal" sx={theme => ({
               transition: 'color 0.2s ease',
               ":hover": {
