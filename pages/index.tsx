@@ -29,7 +29,6 @@ export default function Page() {
   })
 
   const groupedByBookName = React.useMemo(() => {
-    console.log('recompute', 'groupedByBookName')
     return groupBy(notes, note => note.bookName)
   }, [notes])
 
