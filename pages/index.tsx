@@ -1,14 +1,16 @@
-import { Accordion, Blockquote, Box, Button, Center, Divider, Group, MantineTheme, Paper, Stack, Text, Textarea, Title } from "@mantine/core";
-import React from "react";
+import { Accordion, Blockquote, Box, Button, Center, CopyButton, Divider, Group, MantineTheme, Paper, Stack, Text, Textarea, Title } from "@mantine/core";
+import React, { useMemo } from "react";
 import { Note } from "../parsers/model";
 import { parseWXRead, wxReadPlaceholder } from "../parsers/wxRead";
 import { flatMap, groupBy } from 'lodash'
-import { transform } from '../templates'
+import { transformNote } from '../templates'
 import { useClipboard } from '@mantine/hooks'
 import { openModal } from "@mantine/modals";
 import { Navbar } from "../components/Navbar";
 import { downloadText, mq } from "../utils";
 import Script from "next/script";
+import { readwiseCSV } from "../templates/readwiseCSV";
+import Link from "next/link";
 declare var umami: any
 
 function track(eventName: string) {
@@ -127,7 +129,7 @@ export default function Page() {
               <Group>
                 <Button color={clipboard.copied ? 'teal' : undefined} onClick={_ => {
                   // should be moved to a function outside
-                  const note = transform(notes, 'readwiseCSV')
+                  const note = transformNote(notes, 'readwiseCSV', false)
                   openModal({
                     title: '导出到 Readwise CSV',
                     children: (
@@ -151,7 +153,18 @@ export default function Page() {
                     )
                   })
                 }} variant='default'>Readwise CSV</Button>
-                <Button disabled variant='default'>自定义格式</Button>
+                <Button variant='default' onClick={_ => {
+                  openModal({
+                    size: '50%',
+                    centered: true,
+                    title: '自定义格式导出',
+                    children: (
+                      <Box>
+                        <TemplateRender notes={notes} />
+                      </Box>
+                    )
+                  })
+                }}>自定义格式</Button>
               </Group>
             </Stack>}
         </Stack>
@@ -190,6 +203,42 @@ function ImportForm(props: {
       })} />
       <Button onClick={onClickTransform} sx={theme => ({
       })}>添加笔记</Button>
+    </Stack>
+  )
+}
+
+function TemplateRender(props: {
+  notes: Note[]
+}) {
+  const [templateString, setTemplateString] = React.useState(readwiseCSV)
+  const clipboard = useClipboard()
+  const result = useMemo(() => {
+    if (!templateString) {
+      return ""
+    }
+    return transformNote(props.notes, templateString, true)
+  }, [templateString])
+
+  return (
+    <Stack>
+      <Text size="sm">
+        可使用 nunjucks 模板语法: <Link href="/doc" target={"_blank"}>
+          使用文档
+        </Link>
+      </Text>
+      <Group grow>
+        <Textarea spellCheck={false} minRows={22} defaultValue={templateString} onChange={_ => {
+          setTemplateString(_.target.value)
+        }}></Textarea>
+        <Stack>
+          <Textarea spellCheck={false} disabled minRows={20} value={result}></Textarea>
+          <CopyButton value={result}>
+            {({ copied, copy }) => (
+              <Button color={copied ? 'green' : 'blue'} onClick={copy}>{copied ? '已复制' : '复制'}</Button>
+            )}
+          </CopyButton>
+        </Stack>
+      </Group>
     </Stack>
   )
 }

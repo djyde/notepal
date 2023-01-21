@@ -7,9 +7,13 @@ const templates = {
   readwiseCSV,
 } as Record<string, string>;
 
-export function transform(notes: Note[], template: string) {
+export function transformNote(
+  notes: Note[],
+  template: string,
+  fromString: boolean
+) {
   const flatNotes = flatMap(notes, (note) => note.children);
-  return nunjucks.renderString(templates[template], {
-    notes: flatNotes
-  });
+  return nunjucks.renderString(fromString ? template : templates[template], {
+    notes: flatNotes,
+  }).trim();
 }
