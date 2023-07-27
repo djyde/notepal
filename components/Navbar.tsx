@@ -29,7 +29,7 @@ export function Navbar(props: {
                 {props.logo}
               </Link>
             </Text>
-            <Text size='sm'>by <Text underline component="a" href="https://lutaonan.com">RandySoft</Text>
+            <Text size='sm'>by <Text underline component="a" href="https://randynamic.org">Randynamic Studio</Text>
             </Text>
           </Group>
           <Group sx={{
@@ -76,8 +76,19 @@ export function Navbar(props: {
             </Text>
           </Group>
         </Group>
+
+
       </Container>
 
+      <Box mt={12} p={12} sx={theme => ({
+        backgroundColor: theme.colors.green[5],
+        textAlign: 'center',
+        color: theme.colors.gray[9],
+      })}>
+        使用 <a href="https://notepal.randynamic.org" style={{
+          color: '#000'
+        }}> Notepal 浏览器插件</a> 获得更好的体验
+      </Box>
     </Box>
   )
 }
